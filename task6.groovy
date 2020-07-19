@@ -1,7 +1,7 @@
 job("task6_code_pull"){
-        description("This will copy code from github & filter and send it to different directories present in the minikube based on file extension")
+        description("This job will segregate the file based on the extension and copy into different folder ")
         scm {
-                 github('gouravk842/devops_task3.git' , 'master')
+                 github('Pujagupta26/devops_task6' , 'master')
              }
         triggers {
                 scm("* * * * *")
@@ -63,7 +63,7 @@ job("task6_mailer"){
    } 
          }
         steps {
-        shell('''status=$(curl -o /dev/null -s -w "%{http_code}" http://192.168.99.104:32145/code.html)
+        shell('''status=$(curl -o /dev/null -s -w "%{http_code}" http://172.168.60.104:32145/code.html)
 
 echo $status
 if [[ $status == 200 ]]
@@ -73,7 +73,7 @@ else
  sudo python3 /root/msg.py
 fi
 
-status=$(curl -o /dev/null -s -w "%{http_code}" http://192.168.99.104:32146/code.php)
+status=$(curl -o /dev/null -s -w "%{http_code}" http://172.168.60.104:32146/code.php)
 
 echo $status
 if [[ $status == 200 ]]
